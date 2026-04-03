@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首頁 | 酒精博士 Alcohol Dr.</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">酒精博士</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">首頁</a></li>
+            <li><a href="science.html">科學研究</a></li>
+            <li><a href="contact.html">聯絡團隊</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>精準代謝，應酬無負擔</h1>
+            <p>最科學的保健方案，全面守護您的肝臟健康與活力。</p>
+            <a href="science.html" class="cta-button">探索科學原理</a>
+        </div>
+    </header>
+</body>
+</html>
