@@ -1,13 +1,11 @@
-// 1. 初始化 AOS 頂級滑動動畫引擎
 document.addEventListener('DOMContentLoaded', function() {
     AOS.init({
-        once: true,           // 動畫只執行一次，避免重複滾動時視覺疲勞
-        offset: 50,           // 距離底部多少開始觸發動畫
-        easing: 'ease-out-cubic', // 精品級平滑貝茲曲線
+        once: true,
+        offset: 50,
+        easing: 'ease-out-cubic',
     });
 });
 
-// 2. 手機版漢堡選單切換邏輯
 const menuBtn = document.getElementById('menuBtn');
 const navLinks = document.getElementById('navLinks');
 const bars = document.querySelectorAll('.bar');
@@ -15,7 +13,6 @@ const bars = document.querySelectorAll('.bar');
 menuBtn.addEventListener('click', () => {
     navLinks.classList.toggle('active');
     
-    // 漢堡按鈕變形動畫 (變成 X)
     if (navLinks.classList.contains('active')) {
         bars[0].style.transform = 'translateY(9px) rotate(45deg)';
         bars[1].style.transform = 'translateY(-9px) rotate(-45deg)';
@@ -25,7 +22,7 @@ menuBtn.addEventListener('click', () => {
     }
 });
 
-// 點擊選單連結後自動收合 (優化手機體驗)
+// 注意：多頁面架構下，點擊真實連結會直接換頁，這段主要為了確保點擊本頁連結時(若有)會收起選單
 document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {
         navLinks.classList.remove('active');
