@@ -1,58 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&display=swap');
+
+/* 全局金色高清視覺系統 */
 :root {
-    --bg-dark: #0a0a0a;
-    --bg-card: rgba(255, 255, 255, 0.03);
-    --gold-light: #fcf6ba;
-    --gold-main: #d4af37;
-    --gold-dark: #b38728;
-    --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-    --text-main: #ffffff;
-    --text-muted: #a0a0a0;
+    --black: #000000;
+    --dark: #111111;
+    --gold: #D4AF37; /* 高級琥珀金 */
+    --gold-text: #D4AF37; /* 金色文字 */
+    --white: #ffffff;
+    --shadow-gold: 2px 2px 10px rgba(212, 175, 55, 0.4); /* 高清金色陰影 */
+    --box-shadow-high: 0 10px 40px rgba(0,0,0,0.5); /* 高清卡片陰影 */
+    --ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Noto Sans TC', sans-serif;
     -webkit-tap-highlight-color: transparent;
 }
 
 body {
-    background-color: var(--bg-dark);
-    color: var(--text-main);
-    font-family: 'Noto Sans TC', sans-serif;
+    background-color: var(--black);
+    color: var(--white);
+    line-height: 1.8;
     overflow-x: hidden;
 }
 
-.glass-nav {
+/* 質感毛玻璃導覽列 */
+.navbar {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1000;
-    background: rgba(10, 10, 10, 0.6);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-    transition: 0.3s ease;
+    padding: 15px 0;
+    z-index: 2000;
 }
 
 .nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;
 }
 
-.logo {
-    text-decoration: none;
-    font-family: 'Noto Serif TC', serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    letter-spacing: 1px;
+.logo-img {
+    height: 40px; /* 手機版稍小一點 */
+    object-fit: contain;
 }
 
-.gold-text { color: var(--gold-main); }
-.logo-sub { color: var(--text-main); font-size: 0.9rem; font-weight: 300; }
-
+/* 漢堡選單 (預設顯示於手機) */
 .menu-btn {
     width: 30px;
     height: 20px;
@@ -66,17 +68,18 @@ body {
 .menu-btn .bar {
     width: 100%;
     height: 2px;
-    background-color: var(--gold-light);
+    background-color: var(--gold);
     transition: 0.3s;
 }
 
+/* 手機版導覽列樣式 (側邊滑出) */
 .nav-links {
     position: fixed;
     top: 0;
     right: -100%;
     width: 70%;
     height: 100vh;
-    background: rgba(10, 10, 10, 0.95);
+    background: rgba(17, 17, 17, 0.95);
     backdrop-filter: blur(20px);
     display: flex;
     flex-direction: column;
@@ -85,175 +88,150 @@ body {
     list-style: none;
     transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1);
     border-left: 1px solid rgba(212, 175, 55, 0.2);
+    gap: 30px;
 }
 
-.nav-links.active { right: 0; }
-.nav-links li { margin: 20px 0; }
+.nav-links.active {
+    right: 0;
+}
+
 .nav-links a {
-    color: var(--text-main);
     text-decoration: none;
+    color: var(--white);
+    font-weight: 400;
     font-size: 1.2rem;
+    position: relative;
     letter-spacing: 2px;
 }
 
-.hero-section {
+.nav-links a:hover, .nav-links a.active {
+    color: var(--gold);
+    text-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+}
+
+/* 全螢幕沉浸式橫幅 */
+.hero {
+    height: 100dvh; /* 使用 dvh 適配手機瀏覽器工具列 */
     position: relative;
-    height: 100dvh;
+    /* 加入 Unsplash 高清佔位圖，之後替換成你的 hero-bg.jpg */
+    background: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000&auto=format&fit=crop') center/cover no-repeat;
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
+    justify-content: center; /* 手機版置中對齊 */
     padding: 0 20px;
 }
 
-.hero-bg {
+.hero-bg-overlay {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000&auto=format&fit=crop') center/cover no-repeat;
-    z-index: -1;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.8) 100%);
 }
 
-.hero-bg::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to bottom, rgba(10,10,10,0.4) 0%, rgba(10,10,10,0.9) 100%);
+.hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center; /* 手機版置中 */
+    width: 100%;
+    max-width: 600px;
 }
 
-.hero-content { position: relative; z-index: 1; margin-top: 50px; }
-
-.badge {
-    display: inline-block;
-    padding: 6px 12px;
-    border: 1px solid var(--gold-main);
-    border-radius: 30px;
-    font-size: 0.8rem;
-    color: var(--gold-light);
-    letter-spacing: 2px;
-    margin-bottom: 20px;
-    background: rgba(212, 175, 55, 0.1);
-}
-
-.main-title {
-    font-family: 'Noto Serif TC', serif;
-    font-size: clamp(3.5rem, 15vw, 6rem);
-    font-weight: 700;
+.hero-quote {
+    color: var(--gold);
+    font-size: clamp(4rem, 15vw, 6rem); /* 流體字體，手機不會太大 */
+    font-weight: 900;
+    font-style: italic;
+    text-shadow: var(--shadow-gold);
     margin-bottom: 10px;
     line-height: 1.1;
 }
 
-.gold-gradient-text {
-    background: var(--gold-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0px 4px 15px rgba(212, 175, 55, 0.4));
-}
-
-.subtitle {
-    font-size: clamp(1rem, 4vw, 1.2rem);
-    color: var(--text-muted);
-    line-height: 1.8;
+.hero-subtitle {
+    color: var(--gold-text);
+    font-size: clamp(1.2rem, 5vw, 2.2rem); /* 流體字體 */
+    font-weight: 300;
     margin-bottom: 40px;
     letter-spacing: 1px;
 }
 
 .hero-buttons {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* 手機版按鈕直排 */
     gap: 15px;
-    width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
+    align-items: center;
 }
 
-.btn-gold-solid, .btn-glass {
-    padding: 15px 30px;
-    border-radius: 30px;
+/* 高級金色按鈕系統 */
+.btn {
+    display: inline-block;
+    padding: 15px 40px;
+    border-radius: 50px;
     text-decoration: none;
-    font-weight: 500;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: 0.3s var(--ease-out);
+    cursor: pointer;
+    box-shadow: var(--box-shadow-high);
+    width: 100%;
+    max-width: 250px;
     text-align: center;
 }
 
-.btn-gold-solid {
-    background: var(--gold-gradient);
-    color: #000;
+.btn-gold {
+    background-color: var(--gold);
+    color: var(--black); /* 金底黑字更俐落 */
+    border: 2px solid var(--gold);
 }
 
-.glow-shadow {
-    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
-    animation: pulse-gold 2s infinite alternate;
+.btn-gold:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.5);
 }
 
-@keyframes pulse-gold {
-    0% { box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3); }
-    100% { box-shadow: 0 8px 35px rgba(212, 175, 55, 0.6); }
+.btn-outline {
+    background-color: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
 }
 
-.btn-glass {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: var(--text-main);
-    backdrop-filter: blur(10px);
+.btn-outline:hover {
+    background-color: rgba(255,255,255,0.1);
+    transform: translateY(-5px);
 }
 
-.feature-section {
-    padding: 80px 20px;
-    background: var(--bg-dark);
-}
-
-.section-title {
+/* 其他分頁高清版排版 */
+.page-content {
+    padding: 150px 20px 80px;
+    background-color: var(--dark);
     text-align: center;
-    font-family: 'Noto Serif TC', serif;
-    font-size: 2rem;
-    margin-bottom: 40px;
 }
 
-.card-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
+.section-black {
+    padding: 100px 20px;
+    background-color: var(--black);
+    text-align: center;
 }
 
-.premium-card {
-    background: var(--bg-card);
-    border: 1px solid rgba(212, 175, 55, 0.15);
-    padding: 30px;
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    position: relative;
-    overflow: hidden;
-}
-
-.premium-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 50%;
-    transform: translateX(-50%);
-    width: 50%; height: 2px;
-    background: var(--gold-gradient);
-    box-shadow: 0 2px 15px rgba(212, 175, 55, 0.8);
-}
-
-.card-icon { font-size: 2.5rem; margin-bottom: 15px; }
-.premium-card h3 { color: var(--gold-light); margin-bottom: 10px; font-size: 1.2rem; }
-.premium-card p { color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; }
-
+/* 桌機版排版調整 (>= 768px) */
 @media (min-width: 768px) {
-    .hero-buttons { flex-direction: row; justify-content: center; max-width: none; }
-    .btn-gold-solid, .btn-glass { width: 200px; }
-    .card-grid { grid-template-columns: 1fr 1fr; max-width: 900px; margin: 0 auto; }
-    .menu-btn { display: none; }
+    .logo-img { height: 50px; }
+    .menu-btn { display: none; } /* 隱藏漢堡選單 */
+    
     .nav-links {
         position: static;
         flex-direction: row;
         width: auto; height: auto;
         background: transparent;
         border: none;
+        gap: 35px;
     }
-    .nav-links li { margin: 0 0 0 30px; }
     .nav-links a { font-size: 1rem; }
-    .btn-gold-outline { border: 1px solid var(--gold-main); padding: 8px 20px; border-radius: 20px; color: var(--gold-main) !important; }
+
+    .hero {
+        justify-content: flex-end; /* 桌機恢復靠右對齊 */
+        padding-right: 15%;
+    }
+    .hero-content { text-align: right; }
+    .hero-buttons { flex-direction: row; justify-content: flex-end; gap: 20px; }
+    .btn { width: auto; max-width: none; }
 }
