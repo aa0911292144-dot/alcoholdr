@@ -1,4 +1,3 @@
-/* 基礎設定與變數定義 */
 :root {
     --bg-dark: #0a0a0a;
     --bg-card: rgba(255, 255, 255, 0.03);
@@ -24,7 +23,6 @@ body {
     overflow-x: hidden;
 }
 
-/* ================= 導覽列 (玻璃質感) ================= */
 .glass-nav {
     position: fixed;
     top: 0;
@@ -55,7 +53,6 @@ body {
 .gold-text { color: var(--gold-main); }
 .logo-sub { color: var(--text-main); font-size: 0.9rem; font-weight: 300; }
 
-/* 漢堡選單 */
 .menu-btn {
     width: 30px;
     height: 20px;
@@ -73,7 +70,6 @@ body {
     transition: 0.3s;
 }
 
-/* 手機版選單隱藏與展開 */
 .nav-links {
     position: fixed;
     top: 0;
@@ -100,10 +96,9 @@ body {
     letter-spacing: 2px;
 }
 
-/* ================= 首頁 Hero 區塊 ================= */
 .hero-section {
     position: relative;
-    height: 100dvh; /* 完美適配手機瀏覽器高度 */
+    height: 100dvh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -111,16 +106,13 @@ body {
     padding: 0 20px;
 }
 
-/* 高清背景圖與奢華遮罩 */
 .hero-bg {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    /* 這裡使用高畫質夜生活/科技感圖片做範例，質感絕對出來。請替換為你的圖片 */
     background: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000&auto=format&fit=crop') center/cover no-repeat;
     z-index: -1;
 }
 
-/* 雙重遮罩：加深底部，讓文字突出 */
 .hero-bg::after {
     content: '';
     position: absolute;
@@ -142,10 +134,9 @@ body {
     background: rgba(212, 175, 55, 0.1);
 }
 
-/* 極致漸層金文字 */
 .main-title {
     font-family: 'Noto Serif TC', serif;
-    font-size: clamp(3.5rem, 15vw, 6rem); /* 手機上自動縮放，極具張力 */
+    font-size: clamp(3.5rem, 15vw, 6rem);
     font-weight: 700;
     margin-bottom: 10px;
     line-height: 1.1;
@@ -155,7 +146,7 @@ body {
     background: var(--gold-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0px 4px 15px rgba(212, 175, 55, 0.4)); /* 高清金色發光字 */
+    filter: drop-shadow(0px 4px 15px rgba(212, 175, 55, 0.4));
 }
 
 .subtitle {
@@ -166,7 +157,6 @@ body {
     letter-spacing: 1px;
 }
 
-/* ================= 按鈕設計 (高清陰影) ================= */
 .hero-buttons {
     display: flex;
     flex-direction: column;
@@ -191,7 +181,6 @@ body {
     color: #000;
 }
 
-/* 核心：金色高清陰影動畫 */
 .glow-shadow {
     box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
     animation: pulse-gold 2s infinite alternate;
@@ -209,7 +198,6 @@ body {
     backdrop-filter: blur(10px);
 }
 
-/* ================= 內容卡片區塊 ================= */
 .feature-section {
     padding: 80px 20px;
     background: var(--bg-dark);
@@ -224,11 +212,10 @@ body {
 
 .card-grid {
     display: grid;
-    grid-template-columns: 1fr; /* 手機版單欄排版 */
+    grid-template-columns: 1fr;
     gap: 20px;
 }
 
-/* 高級玻璃質感卡片 + 邊框金色高光 */
 .premium-card {
     background: var(--bg-card);
     border: 1px solid rgba(212, 175, 55, 0.15);
@@ -240,7 +227,6 @@ body {
     overflow: hidden;
 }
 
-/* 卡片頂部的金色光芒點綴 */
 .premium-card::before {
     content: '';
     position: absolute;
@@ -251,24 +237,10 @@ body {
     box-shadow: 0 2px 15px rgba(212, 175, 55, 0.8);
 }
 
-.card-icon {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-}
+.card-icon { font-size: 2.5rem; margin-bottom: 15px; }
+.premium-card h3 { color: var(--gold-light); margin-bottom: 10px; font-size: 1.2rem; }
+.premium-card p { color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; }
 
-.premium-card h3 {
-    color: var(--gold-light);
-    margin-bottom: 10px;
-    font-size: 1.2rem;
-}
-
-.premium-card p {
-    color: var(--text-muted);
-    line-height: 1.6;
-    font-size: 0.95rem;
-}
-
-/* 平板/桌機佈局微調 (確保大螢幕也好看) */
 @media (min-width: 768px) {
     .hero-buttons { flex-direction: row; justify-content: center; max-width: none; }
     .btn-gold-solid, .btn-glass { width: 200px; }
